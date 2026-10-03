@@ -1,70 +1,80 @@
 # Jemputan Perkahwinan Alya & Haris
 
-Laman jemputan satu halaman menggunakan Next.js App Router, TypeScript, Tailwind CSS, Framer Motion dan Google Sheets API. Semua maklumat acara dalam projek ini ialah contoh. Tukar butiran dalam lib/wedding.ts sebelum pautan diterbitkan.
+Laman jemputan satu halaman menggunakan Next.js App Router, TypeScript, Tailwind CSS dan Framer Motion. RSVP direkodkan ke Google Sheets melalui Google Apps Script Web App, tanpa Google Sheets API atau service-account key. Semua butiran acara dalam projek ini ialah contoh; tukar sebelum pautan diterbitkan.
 
-## 1. Sediakan Google Sheets
+## 1. Sediakan Google Sheet
 
-1. Cipta projek di Google Cloud Console dan aktifkan Google Sheets API.
-2. Cipta satu service account. Jana dan muat turun kunci JSON untuk akaun itu. Simpan fail tersebut dengan selamat; jangan masukkannya ke dalam Git.
-3. Cipta Google Sheet, tambah tab bernama RSVP, dan masukkan tajuk ini ke baris pertama:
+1. Cipta Google Sheet menggunakan akaun Google yang akan memiliki helaian.
+2. Tambah tab bernama RSVP.
+3. Masukkan tajuk berikut pada baris pertama:
 
    Timestamp | Full Name | Attendance | Pax | Wishes
 
-4. Kongsi helaian dengan alamat e-mel service account sebagai Editor. Salin ID spreadsheet daripada URL — bahagian selepas /d/ dan sebelum /edit.
+Anda tidak perlu mencipta projek Google Cloud, mengaktifkan Google Sheets API atau berkongsi sheet dengan service account.
 
-API menggunakan service account pada bahagian pelayan sahaja. Kelayakan Google tidak dihantar kepada pelayar tetamu.
+## 2. Cipta Apps Script Web App
 
-## 2. Tetapkan pemboleh ubah persekitaran
+1. Buka script.google.com dan cipta projek baharu.
+2. Gantikan kandungan fail Code.gs dengan kod dalam apps-script/Code.gs projek ini, kemudian simpan.
+3. Buka Project Settings → Script properties. Tambah tiga sifat:
 
-Salin .env.example sebagai .env.local, kemudian isikan nilai sebenar:
+   SPREADSHEET_ID — ID spreadsheet daripada URL, antara /d/ dan /edit.
+   SHEET_NAME — RSVP.
+   WEBHOOK_SECRET — rahsia rawak yang panjang. Cipta satu nilai, kemudian gunakan nilai sama dalam .env.local dan Vercel.
 
-- GOOGLE_SHEETS_SPREADSHEET_ID — ID spreadsheet sahaja.
-- GOOGLE_SERVICE_ACCOUNT_EMAIL — nilai client_email dalam fail JSON service account.
-- GOOGLE_PRIVATE_KEY — nilai private_key dalam fail JSON. Kekalkan tanda petik dan pemisah baris dalam format backslash-n.
-- GOOGLE_SHEETS_SHEET_NAME — nama tab, lazimnya RSVP.
+4. Pilih Deploy → New deployment → Web app. Tetapkan Execute as kepada Me dan akses awam yang membenarkan tetamu tanpa log masuk (biasanya dipaparkan sebagai Anyone). Benarkan kebenaran yang diminta semasa deploy. URL deployment mesti berakhir dengan /exec.
+5. Simpan URL tersebut. Jika anda mengubah kod Apps Script selepas deploy, buat deployment versi baharu supaya perubahan digunakan.
 
-Contoh format .env.local:
+Web App boleh dicapai secara umum, tetapi hanya route pelayan Next.js menghantar rahsia tersebut. Jangan letak rahsia dalam komponen pelayar atau pemboleh ubah NEXT_PUBLIC.
 
-    GOOGLE_SHEETS_SPREADSHEET_ID=1abc123yourSheetId
-    GOOGLE_SERVICE_ACCOUNT_EMAIL=rsvp-writer@your-project.iam.gserviceaccount.com
-    GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nPASTE_KEY_CONTENT_HERE\n-----END PRIVATE KEY-----\n"
-    GOOGLE_SHEETS_SHEET_NAME=RSVP
+Apps Script mempunyai kuota penggunaan yang ditetapkan Google dan kuota boleh berubah. Had akaun percuma memadai untuk aliran RSVP biasa; lihat halaman rasmi Google untuk [kuota semasa](https://developers.google.com/apps-script/guides/services/quotas) dan [cara deploy Web App](https://developers.google.com/apps-script/guides/web).
 
-Jangan commit .env.local atau kunci JSON. Fail .gitignore mengecualikan fail rahsia tersebut.
+## 3. Tetapkan pemboleh ubah persekitaran
 
-## 3. Pasang dan jalankan
+Salin .env.example sebagai .env.local, kemudian isikan:
 
-Gunakan Node.js 20.9 atau lebih baharu. Dari folder projek, jalankan:
+- GOOGLE_APPS_SCRIPT_URL — URL Web App yang berakhir dengan /exec.
+- GOOGLE_APPS_SCRIPT_SECRET — nilai yang sama dengan WEBHOOK_SECRET dalam Script properties.
+
+Contoh:
+
+    GOOGLE_APPS_SCRIPT_URL=https://script.google.com/macros/s/DEPLOYMENT_ID/exec
+    GOOGLE_APPS_SCRIPT_SECRET=masukkan-rahsia-rawak-yang-panjang-di-sini
+
+Jangan commit .env.local. Fail .gitignore mengecualikannya.
+
+## 4. Pasang dan jalankan
+
+Gunakan Node.js 20.9 atau lebih baharu. Dari folder projek:
 
     npm install
     npm run dev
 
-Buka http://localhost:3000. Penghantaran RSVP akan menulis baris ke helaian yang dikonfigurasi. Jika kelayakan belum diisi, API memulangkan mesej konfigurasi dan borang kekal boleh dicuba semula.
+Buka http://localhost:3000. Borang menghantar data ke route Next.js; route itu mengesahkan input dan menghantar RSVP ke Apps Script. Jika URL atau rahsia belum dikonfigurasi, borang memaparkan ralat dan boleh dicuba semula.
 
-## 4. Ganti butiran jemputan dan aset contoh
+## 5. Ganti butiran jemputan dan aset
 
-Ubah lib/wedding.ts untuk nama pasangan, tarikh dan zon waktu, jadual, lokasi, wakil keluarga, nombor telefon, butiran akaun dan URL gambar. Pastikan date.iso menggunakan tarikh ISO 8601 bersama ofset Malaysia +08:00; jam kira detik membaca nilai itu.
+Ubah lib/wedding.ts untuk nama pasangan, tarikh dan zon waktu, atur cara, lokasi, wakil keluarga, nombor telefon, butiran akaun dan URL gambar. Pastikan date.iso menggunakan tarikh ISO 8601 bersama ofset Malaysia +08:00.
 
-URL gambar Unsplash dan QR placehold.co digunakan terus sebagai aset sementara. Untuk fail sendiri, letakkan imej dalam public/images/, kemudian ubah nilai images.cover, images.hero, images.details, images.location atau gift.qrImage kepada laluan seperti /images/kulit.jpg dan /images/duitnow-qr.png. Semak nombor dan pautan telefon sebelum menghebahkan jemputan.
+URL gambar Unsplash dan QR placehold.co digunakan sebagai aset sementara. Untuk imej sendiri, letakkannya dalam public/images/ dan ubah images.cover, images.hero, images.details, images.location atau gift.qrImage kepada laluan seperti /images/kulit.jpg. Semak semua nombor telefon, lokasi, akaun dan QR sebelum menghebahkan jemputan.
 
-## 5. Tambah muzik MP3
+## 6. Tambah muzik MP3
 
-Letakkan fail muzik yang anda berhak gunakan di public/audio/wedding-song.mp3. Laluan itu telah ditetapkan dalam musicSrc di lib/wedding.ts. Fail akan mula dimainkan selepas tetamu menekan Buka Jemputan, iaitu tindakan pengguna yang diperlukan kebanyakan pelayar untuk membenarkan audio.
+Letakkan fail muzik yang anda berhak gunakan di public/audio/wedding-song.mp3. Laluan itu ditetapkan dalam musicSrc di lib/wedding.ts. Muzik mula dimainkan selepas tetamu menekan Buka Jemputan.
 
-## 6. Deploy ke Vercel
+## 7. Deploy ke Vercel
 
-Import repositori ini ke Vercel sebagai projek Next.js. Tambah pemboleh ubah GOOGLE_SHEETS_SPREADSHEET_ID, GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY dan GOOGLE_SHEETS_SHEET_NAME dalam tetapan Project Settings → Environment Variables untuk Production (serta Preview jika perlu). Kekalkan kunci sebagai nilai rahsia dan redeploy selepas mengubah environment variables.
-
-Sebelum jemputan dikongsi, gantikan semua data contoh, uji pautan lokasi dan nombor telefon, pastikan akaun penerima sepadan dengan QR, dan masukkan tajuk lajur pada baris pertama helaian.
+Import repositori ke Vercel sebagai projek Next.js. Tambah GOOGLE_APPS_SCRIPT_URL dan GOOGLE_APPS_SCRIPT_SECRET dalam Project Settings → Environment Variables untuk Production (serta Preview jika diperlukan). Kekalkan rahsia sebagai nilai server-side tanpa awalan NEXT_PUBLIC, kemudian redeploy.
 
 ## Struktur utama
 
 - app/page.tsx — halaman utama.
-- app/api/rsvp/route.ts — pengesahan pelayan dan append ke Google Sheets.
+- app/api/rsvp/route.ts — validasi pelayan dan panggilan ke Apps Script.
+- apps-script/Code.gs — pemeriksaan rahsia, validasi dan append ke Google Sheet.
 - components/WelcomeCover.tsx — kulit jemputan dan animasi pembukaan.
 - components/Countdown.tsx — kiraan detik.
-- components/ContactButtons.tsx — butang WhatsApp dan telefon.
+- components/ContactButtons.tsx — pautan WhatsApp dan telefon.
 - components/AudioPlayer.tsx — kawalan muzik terapung.
-- components/RsvpForm.tsx — borang, validasi pelayar, keadaan loading dan berjaya.
-- components/WeddingInvitation.tsx — susun atur dan interaksi satu halaman.
+- components/RsvpForm.tsx — validasi, loading dan mesej berjaya.
+- components/WeddingInvitation.tsx — susun atur dan interaksi.
 - lib/wedding.ts — butiran contoh yang perlu disesuaikan.

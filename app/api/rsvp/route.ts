@@ -1,5 +1,3 @@
-import { google } from "googleapis";
-
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -32,7 +30,6 @@ export async function POST(request: Request) {
     return jsonError("Permintaan tidak sah.", 400);
   }
 
-  // Quietly accept honeypot submissions so basic bots do not learn the field is monitored.
   if (typeof body.website === "string" && body.website.trim().length > 0) {
     return Response.json({ message: "RSVP anda telah diterima." }, { status: 202 });
   }
@@ -63,41 +60,59 @@ export async function POST(request: Request) {
     pax = paxValue;
   }
 
-  const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID?.trim();
-  const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL?.trim();
-  const configuredPrivateKey = process.env.GOOGLE_PRIVATE_KEY;
-
-  if (!spreadsheetId || !serviceAccountEmail || !configuredPrivateKey) {
+  const endpointSetting = process.env.GOOGLE_APPS_SCRIPT_URL?.trim();
+  const sharedSecret = process.env.GOOGLE_APPS_SCRIPT_SECRET;
+  if (!endpointSetting || !sharedSecret) {
     return jsonError("Borang RSVP belum dikonfigurasi. Sila hubungi pihak penganjur.", 503);
   }
 
-  const privateKey = configuredPrivateKey.replaceAll("\\n", "\n");
-  const sheetName = (process.env.GOOGLE_SHEETS_SHEET_NAME || "RSVP").trim();
-  const escapedSheetName = sheetName.replace(/'/g, "''");
-  const range = "'" + escapedSheetName + "'!A:E";
+  let endpoint: URL;
+  try {
+    endpoint = new URL(endpointSetting);
+  } catch {
+    return jsonError("Konfigurasi RSVP tidak sah.", 503);
+  }
+
+  if (
+    endpoint.protocol !== "https:" ||
+    endpoint.hostname !== "script.google.com" ||
+    !endpoint.pathname.startsWith("/macros/s/") ||
+    !endpoint.pathname.endsWith("/exec")
+  ) {
+    return jsonError("Konfigurasi RSVP tidak sah.", 503);
+  }
 
   try {
-    const auth = new google.auth.JWT({
-      email: serviceAccountEmail,
-      key: privateKey,
-      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret: sharedSecret,
+        fullName,
+        attendance,
+        pax,
+        wishes,
+      }),
+      cache: "no-store",
+      redirect: "follow",
+      signal: AbortSignal.timeout(15_000),
     });
-    const sheets = google.sheets({ version: "v4", auth });
 
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range,
-      valueInputOption: "RAW",
-      insertDataOption: "INSERT_ROWS",
-      requestBody: {
-        majorDimension: "ROWS",
-        values: [[new Date().toISOString(), fullName, attendance, pax, wishes]],
-      },
-    });
+    const responseText = await response.text();
+    let result: { ok?: boolean };
+    try {
+      result = JSON.parse(responseText) as { ok?: boolean };
+    } catch {
+      return jsonError("Maaf, RSVP anda belum dapat direkodkan. Sila cuba lagi sebentar.", 502);
+    }
+
+    if (!response.ok || result.ok !== true) {
+      return jsonError("Maaf, RSVP anda belum dapat direkodkan. Sila cuba lagi sebentar.", 502);
+    }
 
     return Response.json({ message: "RSVP anda telah diterima." }, { status: 201 });
   } catch {
-    console.error("Google Sheets RSVP append failed.");
+    console.error("Google Apps Script RSVP request failed.");
     return jsonError("Maaf, RSVP anda belum dapat direkodkan. Sila cuba lagi sebentar.", 502);
   }
 }
