@@ -25,7 +25,7 @@ export function AudioPlayer({ isPlaying, isMuted, canPlay, onToggle }: AudioPlay
       aria-pressed={isPlaying && !isMuted}
       title={
         !canPlay
-          ? "Tambah fail MP3 untuk memainkan muzik"
+          ? "Muzik tidak tersedia buat masa ini"
           : isPlaying
             ? isMuted ? "Bunyikan muzik" : "Senyapkan muzik"
             : "Mainkan muzik latar"

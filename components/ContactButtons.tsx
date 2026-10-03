@@ -1,4 +1,4 @@
-import { MessageCircle, Phone } from "lucide-react";
+import { MessageCircle, Phone, UserRound } from "lucide-react";
 
 type ContactButtonsProps = {
   role: string;
@@ -11,6 +11,7 @@ export function ContactButtons({ role, name, phone, displayPhone }: ContactButto
   return (
     <article className="contact-card">
       <div className="contact-card-heading">
+        <span className="contact-avatar" aria-hidden="true"><UserRound size={22} strokeWidth={1.4} /></span>
         <span className="contact-role">{role}</span>
         <h3>{name}</h3>
         <p>{displayPhone}</p>

@@ -12,6 +12,8 @@ export const wedding = {
   },
   venue: {
     name: "Dewan Seri Melur",
+    city: "Putrajaya",
+    country: "Malaysia",
     address: "No. 12, Jalan Melur Indah, Presint 8, 62000 Putrajaya, Malaysia",
     mapQuery: "Dewan Seri Melur, Putrajaya",
   },
@@ -28,7 +30,7 @@ export const wedding = {
     bankName: "Nama Bank",
     accountName: "Alya Sofea & Haris Imran",
     accountNumber: "0000000000",
-    qrImage: "https://placehold.co/480x480/faf8f2/68755f?text=DuitNow+QR",
+    qrImage: "/images/qr-placeholder.svg",
   },
   images: {
     cover: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2200&q=88",

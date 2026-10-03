@@ -1,5 +1,5 @@
-import { WeddingInvitation } from "@/components/WeddingInvitation";
+import { HomeView } from "@/components/InvitationViews";
 
 export default function Home() {
-  return <WeddingInvitation />;
+  return <HomeView />;
 }

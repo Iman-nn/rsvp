@@ -1,0 +1,378 @@
+.page {
+  width: 100%;
+  padding: 34px 0 8px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--sage-dark);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  line-height: 1.6;
+}
+
+.eyebrow > span {
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.pageHeading {
+  margin-bottom: 28px;
+}
+
+.pageHeading h1 {
+  margin: 12px 0 12px;
+  color: var(--sage-dark);
+  font-family: var(--display);
+  font-size: clamp(36px, 4.3vw, 52px);
+  font-weight: 400;
+  letter-spacing: -.055em;
+  line-height: 1.12;
+}
+
+.pageHeading h1 em {
+  color: #78826d;
+  font-weight: 400;
+}
+
+.pageHeading > p {
+  max-width: 600px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.mobileBreak { display: none; }
+
+.primaryButton, .secondaryButton {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 1px solid var(--sage-dark);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+
+.primaryButton {
+  background: var(--sage-dark);
+  color: #fffcf5;
+  box-shadow: 0 5px 12px rgba(43, 62, 47, .08);
+}
+
+.secondaryButton { color: var(--sage-dark); background: transparent; }
+.primaryButton:hover { background: #273b2d; box-shadow: 0 8px 18px rgba(43, 62, 47, .15); transform: translateY(-1px); }
+.secondaryButton:hover { background: #e9eddf; transform: translateY(-1px); }
+
+.textLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  color: var(--sage-dark);
+  font-size: 14px;
+}
+
+.home { padding-top: 20px; }
+.homeIntro { display: flex; justify-content: space-between; align-items: center; padding-bottom: 22px; }
+.homeEdition { display: inline-flex; align-items: center; gap: 14px; color: var(--muted); font-size: 12px; letter-spacing: .07em; }
+.homeEdition svg { color: var(--gold); }
+.homeHero { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 48px; }
+.homeNames { padding: 4px 0 8px; }
+.bismillah { margin: 0 0 10px; width: fit-content; color: var(--sage-dark); font-size: 23px; line-height: 1.5; }
+.homePrelude { margin: 0 0 9px; color: var(--muted); font-size: 14px; }
+.homeNames h1 { display: flex; flex-direction: column; margin: 0; color: var(--sage-dark); font-family: var(--display); font-size: clamp(46px, 5vw, 62px); font-weight: 400; letter-spacing: -.055em; line-height: .99; }
+.homeNames h1 em { margin: 7px 0; color: var(--gold); font-size: .66em; line-height: .7; font-weight: 400; }
+.homeTagline { margin: 16px 0 15px; color: var(--muted); font-family: var(--display); font-size: 19px; font-style: italic; line-height: 1.4; }
+.homeDate { display: inline-flex; align-items: center; gap: 10px; color: var(--sage-dark); font-size: 14px; }
+.homeDate svg { color: var(--gold); }
+.heroPhotoComposition { position: relative; width: 100%; max-width: 380px; margin: 0 auto; padding: 8px 15px 32px; }
+.heroPhoto { position: relative; z-index: 1; height: 310px; border-radius: 200px 200px 15px 15px; background-size: cover; background-position: 52% center; box-shadow: 0 20px 42px rgba(54, 65, 46, .1); }
+.photoHalo { position: absolute; inset: 0 5px 45px; border: 1px solid rgba(180, 151, 94, .5); border-radius: 230px 230px 15px 15px; transform: rotate(5deg); }
+.photoSeal { position: absolute; z-index: 2; right: -5px; bottom: 58px; display: flex; width: 79px; height: 79px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border: 1px solid #d8c8a2; border-radius: 50%; background: #f4efdf; color: var(--sage-dark); box-shadow: 0 0 0 6px rgba(247,245,237,.65); }
+.photoSeal svg { color: #9c8353; }
+.photoSeal span { font-family: var(--display); font-size: 15px; letter-spacing: .04em; }
+.photoCaption { position: absolute; left: 0; right: 0; bottom: 4px; text-align: center; color: var(--muted); font-size: 12px; letter-spacing: .16em; }
+.homeBottom { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; margin-top: 19px; padding-top: 18px; border-top: 1px solid var(--line); }
+.welcomeSalam { margin: 0 0 6px; color: var(--sage-dark); font-family: var(--display); font-size: 20px; }
+.homeWelcome > p:not(.welcomeSalam) { max-width: 510px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+.homeActions { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin-top: 20px; }
+.countdownPanel { display: flex; flex-direction: column; align-items: center; padding: 19px 23px 15px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 254, 249, .56); }
+.countdownPanel > .eyebrow { font-size: 12px; }
+.countdownPanel :global(.countdown-grid) { width: 100%; margin-top: 16px; }
+.countdownNote { display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; color: var(--muted); font-size: 12px; }
+.countdownNote > span { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+
+.eventGrid { display: grid; grid-template-columns: .8fr 1.4fr; gap: 28px; }
+.eventAside { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.dateCard { display: flex; align-items: center; flex-direction: column; border: 1px solid var(--line); border-radius: 14px; background: #eeefe5; padding: 24px; text-align: center; }
+.dateCard strong { margin-top: 7px; color: var(--sage-dark); font-family: var(--display); font-size: 88px; line-height: 1.12; font-weight: 400; letter-spacing: -.06em; }
+.dateMonth { font-family: var(--display); font-size: 23px; color: var(--sage-dark); text-transform: capitalize; }
+.dateDay { margin-top: 8px; color: var(--muted); font-size: 13px; }
+.dateCardRule { display: flex; width: 100%; align-items: center; gap: 13px; margin: 20px 0 15px; color: var(--gold); }
+.dateCardRule::before, .dateCardRule::after { flex: 1; height: 1px; background: var(--line); content: ""; }
+.dateVenue { color: var(--sage-dark); font-size: 14px; }
+.calendarButton { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 9px; margin-top: 15px; padding: 10px 14px; border: 1px solid rgba(83,94,76,.24); border-radius: 7px; color: var(--sage-dark); font-size: 13px; transition: background .2s; }
+.calendarButton:hover { background: rgba(255,255,255,.6); }
+.eventPhoto { height: 132px; border-radius: 10px; background-position: center 55%; background-size: cover; }
+.timelineCard { padding: 29px 34px 24px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,254,249,.72); }
+.cardTopline { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 22px; border-bottom: 1px solid var(--line); color: var(--gold); }
+.timeline { margin: 25px 0 0; padding: 0; list-style: none; }
+.timeline li { position: relative; display: grid; grid-template-columns: 42px 1fr; gap: 21px; padding: 0 0 38px; }
+.timeline li:not(:last-child)::before { position: absolute; top: 34px; bottom: 0; left: 20px; width: 1px; background: var(--line); content: ""; }
+.timeline li:last-child { padding-bottom: 20px; }
+.timelineDot { position: relative; z-index: 1; display: flex; width: 41px; height: 41px; align-items: center; justify-content: center; border: 1px solid #ccd2bf; border-radius: 50%; background: #eef0e7; color: var(--sage-dark); font-family: var(--display); font-size: 15px; }
+.timelineTime { color: #8b7550; font-size: 12px; font-weight: 500; letter-spacing: .03em; }
+.timeline h2 { margin: 7px 0 6px; color: var(--sage-dark); font-family: var(--display); font-size: 29px; font-weight: 400; letter-spacing: -.025em; line-height: 1.2; }
+.timeline p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.eventFootnote { display: flex; gap: 11px; align-items: center; padding-top: 18px; border-top: 1px solid var(--line); color: #9a8256; }
+.eventFootnote p { margin: 0; color: var(--muted); font-family: var(--display); font-size: 17px; font-style: italic; }
+
+.rsvpPage { padding-top: 38px; }
+.rsvpLayout { display: grid; grid-template-columns: .85fr 1.25fr; gap: 60px; }
+.rsvpIntro { padding-top: 15px; }
+.rsvpIntro .pageHeading { margin-bottom: 26px; }
+.rsvpIntro .pageHeading h1 { font-size: clamp(42px,5vw,64px); }
+.rsvpIntro .pageHeading > p { max-width: 370px; }
+.rsvpDetail { display: flex; gap: 13px; align-items: center; padding: 19px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--sage-dark); }
+.rsvpDetail > svg { color: var(--gold); }
+.rsvpDetail div { display: flex; flex-direction: column; gap: 5px; }
+.rsvpDetail strong { font-size: 14px; font-weight: 500; }
+.rsvpDetail span { color: var(--muted); font-size: 13px; }
+.deadline { display: flex; align-items: center; gap: 8px; margin-top: 18px; color: #856f49; font-size: 12px; line-height: 1.6; }
+.deadline > span { width: 5px; height: 5px; flex-shrink: 0; border-radius: 50%; background: var(--gold); }
+.rsvpArt { display: flex; align-items: center; gap: 18px; max-width: 230px; margin: 36px auto 17px; color: #9ba38e; }
+.rsvpArt > span { flex: 1; height: 1px; background: var(--line); }
+.rsvpSignoff { margin: 0; color: var(--muted); font-family: var(--display); font-size: 22px; line-height: 1.5; text-align: center; }
+.rsvpSignoff em { color: var(--sage-dark); font-size: 19px; }
+.formCard { padding: 28px 30px 23px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,254,249,.8); box-shadow: 0 14px 35px rgba(74,83,57,.04); }
+.formCard .cardTopline { margin-bottom: 22px; padding-bottom: 19px; }
+
+.locationGrid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 40px; align-items: center; }
+.locationVisual { position: relative; height: 405px; padding: 8px 25px 18px 12px; }
+.locationPhoto { height: 100%; border-radius: 180px 180px 15px 15px; background-position: center; background-size: cover; }
+.locationArc { position: absolute; inset: 0 16px 27px 0; border: 1px solid #bca77e; border-radius: 180px 180px 15px 15px; transform: rotate(-3deg); pointer-events: none; }
+.locationPhotoLabel { position: absolute; z-index: 1; bottom: 57px; right: 28px; left: 15px; display: flex; align-items: center; flex-direction: column; gap: 9px; color: #fffcf3; }
+.locationPhotoLabel span { font-size: 12px; letter-spacing: .17em; text-transform: uppercase; }
+.locationPhotoLabel strong { font-family: var(--display); font-size: 40px; font-weight: 400; letter-spacing: -.02em; }
+.locationPin { position: absolute; z-index: 2; top: 106px; left: calc(50% - 37px); display: flex; width: 64px; height: 64px; align-items: center; justify-content: center; border: 1px solid rgba(255,252,243,.8); border-radius: 50%; background: rgba(247,245,237,.9); color: var(--sage-dark); box-shadow: 0 0 0 12px rgba(247,245,237,.17), 0 0 0 24px rgba(247,245,237,.08); }
+.venueCard { padding: 30px 32px; border: 1px solid var(--line); border-radius: 15px; background: #fffdf6; }
+.venueIcon { display: flex; width: 47px; height: 47px; align-items: center; justify-content: center; margin-bottom: 21px; border: 1px solid #d5d9c9; border-radius: 50%; background: #f0f2e8; color: var(--sage-dark); }
+.venueCard h2 { margin: 12px 0; color: var(--sage-dark); font-family: var(--display); font-size: 35px; font-weight: 400; letter-spacing: -.04em; line-height: 1.18; }
+.address { max-width: 340px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.venueDate { display: flex; gap: 9px; align-items: center; margin-top: 20px; padding-top: 19px; border-top: 1px solid var(--line); color: var(--sage-dark); font-size: 13px; }
+.venueDate svg { color: var(--gold); }
+.mapActions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 24px; }
+.mapActions a { padding-inline: 12px; font-size: 13px; }
+.mapActions a > svg:last-child { margin-left: auto; }
+.venueHelp { display: flex; min-height: 44px; gap: 7px; align-items: center; justify-content: center; margin-top: 10px; color: var(--muted); font-size: 12px; }
+.venueHelp:hover { color: var(--sage-dark); }
+
+.morePage { max-width: 930px; margin-inline: auto; }
+.moreCards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.moreCard { position: relative; display: flex; align-items: flex-start; flex-direction: column; gap: 24px; min-height: 224px; padding: 28px; border: 1px solid var(--line); border-radius: 15px; background: #eef0e6; transition: background .2s, transform .2s, box-shadow .2s; }
+.moreCard:hover { background: #e7ebdc; transform: translateY(-3px); box-shadow: 0 10px 24px rgba(59,74,51,.06); }
+.giftMenuCard { background: #f2edde; }
+.giftMenuCard:hover { background: #eee5d1; }
+.moreCardIcon { display: flex; width: 48px; height: 48px; align-items: center; justify-content: center; border: 1px solid #ccd1be; border-radius: 50%; background: rgba(255,255,255,.3); color: var(--sage-dark); }
+.giftMenuCard .moreCardIcon { border-color: #d9cbb0; color: #8c7247; }
+.moreCardContent { display: flex; flex-direction: column; gap: 8px; }
+.moreCardContent .eyebrow { font-size: 12px; }
+.moreCardContent strong { color: var(--sage-dark); font-family: var(--display); font-size: 28px; font-weight: 400; letter-spacing: -.025em; line-height: 1.2; }
+.moreCardContent > span:last-child { color: var(--muted); font-size: 13px; }
+.moreArrow { position: absolute; top: 32px; right: 29px; color: var(--sage-dark); }
+.blessingCard { display: flex; align-items: center; flex-direction: column; margin-top: 28px; padding: 26px 30px 0; text-align: center; }
+.blessingCard > svg { color: #9fa68e; }
+.blessingCard blockquote { max-width: 630px; margin: 15px auto 11px; color: var(--sage-dark); font-family: var(--display); font-size: 23px; font-style: italic; line-height: 1.5; }
+.blessingCard > span { color: var(--muted); font-size: 12px; letter-spacing: .12em; }
+.shareAction { margin-top: 24px; }
+
+.backLink { display: inline-flex; min-height: 36px; align-items: center; gap: 7px; margin: -8px 0 17px; color: var(--muted); font-size: 13px; }
+.backLink:hover { color: var(--sage-dark); }
+.contactPage, .giftPage { max-width: 940px; margin-inline: auto; }
+.contactCards { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 31px; }
+.contactFootnote { display: flex; align-items: center; justify-content: center; gap: 9px; margin: 32px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; text-align: center; }
+.contactFootnote svg { flex-shrink: 0; color: var(--gold); }
+
+.giftGrid { display: grid; grid-template-columns: 1.18fr 1fr; gap: 35px; align-items: center; }
+.giftMessage { padding: 10px 0; }
+.giftFlower { display: inline-flex; width: 51px; height: 51px; align-items: center; justify-content: center; margin-bottom: 14px; border: 1px solid #d9cdb7; border-radius: 50%; color: #a68c5b; }
+.giftMessage > .eyebrow { display: flex; font-size: 12px; }
+.giftMessage h2 { margin: 11px 0 24px; color: var(--sage-dark); font-family: var(--display); font-size: 33px; font-weight: 400; letter-spacing: -.025em; line-height: 1.25; }
+.giftMessage h2 em { color: #78826d; }
+.bankCard { display: flex; flex-direction: column; gap: 8px; padding: 21px 23px 8px; border: 1px solid var(--line); border-radius: 11px; background: #efefe4; }
+.bankName { color: #8e7951; font-size: 12px; font-weight: 500; }
+.bankCard > strong { color: var(--sage-dark); font-size: 14px; font-weight: 500; }
+.accountRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 5px; }
+.accountRow > span { color: var(--sage-dark); font-size: 21px; letter-spacing: .045em; font-variant-numeric: tabular-nums; }
+.accountRow button { display: inline-flex; min-height: 40px; gap: 7px; align-items: center; padding: 8px 10px; border: 1px solid #c6cfb9; border-radius: 6px; background: rgba(255,255,255,.55); color: var(--sage-dark); font-size: 12px; cursor: pointer; }
+.accountRow button:hover { background: #fffdf6; }
+.copyStatus { min-height: 20px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.qrCard { display: flex; flex-direction: column; align-items: center; padding: 26px 24px 21px; border: 1px solid var(--line); border-radius: 15px; background: #fffdf7; }
+.qrCard > .eyebrow { font-size: 12px; }
+.qrFrame { width: min(100%, 220px); margin-top: 18px; padding: 10px; border: 1px solid #d9dcca; border-radius: 10px; background: #fff; box-shadow: 0 5px 16px rgba(65,75,48,.04); }
+.qrFrame img { display: block; width: 100%; height: auto; border-radius: 3px; }
+.qrName { margin-top: 16px; color: var(--sage-dark); font-size: 14px; font-weight: 500; }
+.qrCard > p { display: inline-flex; align-items: center; gap: 7px; margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+.qrCard > p svg { color: var(--gold); }
+
+@media (max-width: 900px) {
+  .homeHero, .homeBottom { gap: 28px; }
+  .heroPhoto { height: 300px; }
+  .homeNames h1 { font-size: 54px; }
+  .homeActions { gap: 12px; }
+  .homeActions .primaryButton { padding-inline: 15px; }
+  .homeActions .textLink { font-size: 13px; }
+  .rsvpLayout { gap: 30px; grid-template-columns: .8fr 1.2fr; }
+  .formCard { padding: 24px 23px 20px; }
+  .locationGrid { gap: 25px; grid-template-columns: .85fr 1.15fr; }
+  .venueCard { padding: 27px 24px; }
+  .mapActions { grid-template-columns: 1fr; }
+  .locationVisual { height: 422px; }
+}
+
+@media (max-width: 640px) {
+  .page { padding-top: 18px; }
+  .eyebrow { font-size: 12px; letter-spacing: .12em; }
+  .eyebrow > span { width: 17px; }
+  .pageHeading { margin-bottom: 18px; }
+  .pageHeading h1 { margin: 10px 0 10px; font-size: 38px; }
+  .pageHeading > p { font-size: 14px; line-height: 1.7; }
+  .mobileBreak { display: inline; }
+  .home { padding-top: 10px; }
+  .homeIntro { padding-bottom: 11px; gap: 5px; }
+  .homeEdition { gap: 8px; font-size: 12px; }
+  .homeHero { grid-template-columns: 1.15fr .85fr; gap: 9px; }
+  .homeNames { padding: 3px 0 4px; }
+  .bismillah { margin-bottom: 8px; font-size: 18px; }
+  .homePrelude { margin-bottom: 8px; font-size: 12px; }
+  .homeNames h1 { font-size: clamp(31px, 8.5vw, 43px); line-height: 1.08; }
+  .homeNames h1 em { margin: 6px 0; font-size: .62em; }
+  .homeTagline { margin: 10px 0; font-size: 15px; }
+  .homeDate { gap: 6px; font-size: 12px; white-space: nowrap; }
+  .homeDate svg { width: 13px; }
+  .heroPhotoComposition { padding: 4px 7px 21px; }
+  .heroPhoto { height: 205px; border-radius: 120px 120px 9px 9px; background-position: 49% center; }
+  .photoHalo { inset: 0 3px 31px; border-radius: 120px 120px 9px 9px; }
+  .photoSeal { right: -5px; bottom: 39px; width: 53px; height: 53px; gap: 2px; box-shadow: 0 0 0 4px rgba(247,245,237,.65); }
+  .photoSeal svg { width: 17px; }
+  .photoSeal span { font-size: 12px; }
+  .photoCaption { display: none; }
+  .homeBottom { grid-template-columns: 1fr; gap: 14px; margin-top: 14px; padding-top: 14px; }
+  .welcomeSalam { margin-bottom: 5px; font-size: 18px; }
+  .homeWelcome > p:not(.welcomeSalam) { font-size: 13px; line-height: 1.75; }
+  .homeActions { flex-wrap: nowrap; justify-content: space-between; gap: 7px; margin-top: 13px; }
+  .homeActions .primaryButton { gap: 7px; min-height: 45px; padding: 10px 12px; font-size: 12px; }
+  .homeActions .primaryButton svg { width: 14px; }
+  .homeActions .textLink { gap: 4px; font-size: 12px; }
+  .countdownPanel { padding: 12px 19px; }
+  .countdownPanel > .eyebrow { font-size: 12px; }
+  .countdownPanel :global(.countdown-grid) { margin-top: 8px; }
+  .countdownPanel :global(.countdown-cell) { min-height: 64px; }
+  .countdownNote { display: none; }
+  .eventGrid { grid-template-columns: 1fr; gap: 14px; }
+  .eventAside { display: block; }
+  .dateCard { position: relative; display: grid; grid-template-columns: 68px 1fr; align-items: center; justify-items: start; gap: 0 17px; padding: 15px 18px; text-align: left; }
+  .dateCard > .eyebrow { display: none; }
+  .dateCard strong { grid-column: 1; grid-row: 1 / span 3; margin: 0; font-size: 72px; line-height: 1; }
+  .dateMonth { grid-column: 2; grid-row: 1; font-size: 22px; margin-top: 0; line-height: 1.2; }
+  .dateDay { grid-column: 2; grid-row: 2; margin-top: 3px; font-size: 12px; }
+  .dateCardRule, .dateVenue, .eventPhoto { display: none; }
+  .calendarButton { grid-column: 2; grid-row: 3; width: 100%; min-height: 44px; margin-top: 6px; padding-inline: 9px; background: rgba(255,254,249,.32); font-size: 12px; }
+  .timelineCard { padding: 18px 18px 16px; }
+  .cardTopline { padding-bottom: 17px; }
+  .cardTopline .eyebrow { font-size: 12px; }
+  .timeline { margin-top: 18px; }
+  .timeline li { grid-template-columns: 34px 1fr; gap: 14px; padding-bottom: 20px; }
+  .timeline li:last-child { padding-bottom: 15px; }
+  .timelineDot { width: 34px; height: 34px; font-size: 13px; }
+  .timeline li:not(:last-child)::before { top: 31px; left: 16px; }
+  .timelineTime { font-size: 12px; }
+  .timeline h2 { font-size: 24px; margin: 5px 0; line-height: 1.2; }
+  .timeline p { font-size: 13px; line-height: 1.55; }
+  .eventFootnote { padding-top: 12px; gap: 8px; }
+  .eventFootnote p { font-size: 14px; line-height: 1.5; }
+  .rsvpPage { padding-top: 11px; }
+  .rsvpLayout { grid-template-columns: 1fr; gap: 15px; }
+  .rsvpIntro { padding-top: 0; }
+  .rsvpIntro .pageHeading { margin-bottom: 12px; }
+  .rsvpIntro .pageHeading h1 { font-size: 36px; }
+  .rsvpIntro .pageHeading h1 br { display: none; }
+  .rsvpIntro .pageHeading > p { max-width: 100%; font-size: 13px; }
+  .rsvpDetail { padding: 8px 0; gap: 10px; }
+  .rsvpDetail div { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 3px 9px; }
+  .rsvpDetail strong { font-size: 13px; }
+  .rsvpDetail span { font-size: 12px; }
+  .deadline { margin-top: 8px; font-size: 12px; }
+  .rsvpArt, .rsvpSignoff { display: none; }
+  .formCard { padding: 18px; border-radius: 12px; }
+  .formCard .cardTopline { margin-bottom: 14px; padding-bottom: 14px; }
+  .locationGrid { grid-template-columns: 1fr; gap: 16px; }
+  .locationVisual { height: 158px; padding: 3px 6px 7px; }
+  .locationPhoto { border-radius: 100px 100px 12px 12px; background-position: center 43%; }
+  .locationArc { inset: 0 2px 10px; border-radius: 100px 100px 12px 12px; transform: rotate(-1.8deg); }
+  .locationPhotoLabel { bottom: 28px; gap: 3px; left: 80px; right: 20px; }
+  .locationPhotoLabel > span { font-size: 12px; }
+  .locationPhotoLabel > span:first-child { display: none; }
+  .locationPhotoLabel strong { font-size: 32px; }
+  .locationPin { top: 61px; left: 48px; width: 44px; height: 44px; box-shadow: 0 0 0 8px rgba(247,245,237,.17),0 0 0 16px rgba(247,245,237,.08); }
+  .locationPin svg { width: 24px; }
+  .venueCard { padding: 24px 21px 17px; border-radius: 12px; }
+  .venueIcon { display: none; }
+  .venueCard h2 { margin-top: 8px; font-size: 30px; }
+  .address { font-size: 14px; }
+  .venueDate { margin-top: 15px; padding-top: 15px; font-size: 12px; }
+  .mapActions { grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 19px; }
+  .mapActions a { min-height: 48px; gap: 7px; padding-inline: 10px; font-size: 12px; }
+  .mapActions a svg { width: 16px; }
+  .venueHelp { font-size: 12px; margin-top: 7px; }
+  .moreCards { grid-template-columns: 1fr; gap: 14px; }
+  .moreCard { min-height: 130px; flex-direction: row; align-items: center; gap: 17px; padding: 23px 20px; }
+  .moreCardIcon { flex-shrink: 0; width: 45px; height: 45px; }
+  .moreCardContent { gap: 6px; padding-right: 12px; }
+  .moreCardContent .eyebrow { font-size: 12px; }
+  .moreCardContent strong { font-size: 24px; }
+  .moreCardContent > span:last-child { font-size: 12px; }
+  .moreArrow { top: 19px; right: 17px; width: 18px; }
+  .blessingCard { margin-top: 20px; padding: 19px 9px 0; }
+  .blessingCard blockquote { margin-top: 12px; font-size: 21px; }
+  .shareAction { margin-top: 19px; }
+  .backLink { margin-bottom: 13px; font-size: 12px; }
+  .contactCards { grid-template-columns: 1fr; gap: 16px; margin-top: 22px; }
+  .contactFootnote { margin-top: 21px; font-size: 12px; }
+  .giftGrid { grid-template-columns: 1fr; gap: 20px; }
+  .giftMessage { padding: 0; }
+  .giftFlower, .giftMessage > .eyebrow, .giftMessage h2 { display: none; }
+  .bankCard { padding: 19px 20px 8px; }
+  .bankCard > strong { font-size: 14px; }
+  .accountRow > span { font-size: 21px; }
+  .qrCard { padding: 22px 22px 19px; }
+  .qrFrame { width: 190px; margin-top: 16px; }
+}
+
+@media (max-width: 360px) {
+  .homeNames h1 { font-size: 30px; }
+  .bismillah { font-size: 16px; }
+  .homeDate { font-size: 12px; }
+  .heroPhoto { height: 195px; }
+  .homeActions { flex-direction: column; align-items: stretch; gap: 1px; }
+  .homeActions .textLink { justify-content: center; min-height: 36px; }
+  .moreCardContent strong { font-size: 21px; }
+  .moreCard { gap: 13px; padding-inline: 17px; }
+  .mapActions { grid-template-columns: 1fr; }
+  .accountRow > span { font-size: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton, .secondaryButton, .moreCard { transition: none; }
+  .primaryButton:hover, .secondaryButton:hover, .moreCard:hover { transform: none; }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { MailOpen, Sparkles } from "lucide-react";
 import { wedding } from "@/lib/wedding";
 
 type WelcomeCoverProps = {
@@ -15,6 +15,8 @@ export function WelcomeCover({ onOpen }: WelcomeCoverProps) {
     <motion.section
       className="welcome-cover"
       aria-label="Kulit jemputan perkahwinan"
+      role="dialog"
+      aria-modal="true"
       style={{
         backgroundImage:
           "linear-gradient(180deg, rgba(21,32,25,.3) 0%, rgba(22,32,25,.55) 48%, rgba(19,30,23,.77) 100%), url(" +
@@ -56,7 +58,7 @@ export function WelcomeCover({ onOpen }: WelcomeCoverProps) {
           >
             <span>Buka Jemputan</span>
             <span className="open-invitation-subtitle">Open invitation</span>
-            <ArrowDown size={17} strokeWidth={1.6} />
+            <MailOpen size={20} strokeWidth={1.5} />
           </motion.button>
         </div>
         <span className="cover-bottom-note">SATU HARI · DUA HATI · SELAMANYA</span>

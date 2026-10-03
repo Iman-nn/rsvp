@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { wedding } from "@/lib/wedding";
+import { WeddingInvitation } from "@/components/WeddingInvitation";
+import { RsvpProvider } from "@/components/RsvpProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,14 +21,19 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f5ed",
+  themeColor: "#f8f6ef",
   colorScheme: "light",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ms">
-      <body>{children}</body>
+      <body>
+        <RsvpProvider>
+          <WeddingInvitation>{children}</WeddingInvitation>
+        </RsvpProvider>
+      </body>
     </html>
   );
 }
