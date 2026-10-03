@@ -99,20 +99,47 @@ export async function POST(request: Request) {
     });
 
     const responseText = await response.text();
-    let result: { ok?: boolean };
+    let result: { ok?: unknown; message?: unknown };
     try {
-      result = JSON.parse(responseText) as { ok?: boolean };
+      result = JSON.parse(responseText) as { ok?: unknown; message?: unknown };
     } catch {
+      console.error("Apps Script returned a non-JSON RSVP response.", {
+        status: response.status,
+        contentType: response.headers.get("content-type") ?? "unknown",
+      });
       return jsonError("Maaf, RSVP anda belum dapat direkodkan. Sila cuba lagi sebentar.", 502);
     }
 
     if (!response.ok || result.ok !== true) {
+      const knownMessages = new Set([
+        "Permintaan tidak sah.",
+        "Tidak dibenarkan.",
+        "Ucapan tidak sah.",
+        "Nama tidak sah.",
+        "Status kehadiran tidak sah.",
+        "Ucapan terlalu panjang.",
+        "Bilangan tetamu tidak sah.",
+        "Spreadsheet belum dikonfigurasi.",
+        "Sila cuba lagi.",
+        "Tab spreadsheet tidak ditemui.",
+        "Tidak dapat menyimpan RSVP.",
+      ]);
+      const reason =
+        typeof result.message === "string" && knownMessages.has(result.message)
+          ? result.message
+          : "Respons Apps Script tidak dikenali.";
+      console.error("Apps Script did not accept RSVP.", {
+        status: response.status,
+        reason,
+      });
       return jsonError("Maaf, RSVP anda belum dapat direkodkan. Sila cuba lagi sebentar.", 502);
     }
 
     return Response.json({ message: "RSVP anda telah diterima." }, { status: 201 });
-  } catch {
-    console.error("Google Apps Script RSVP request failed.");
+  } catch (error) {
+    console.error("Google Apps Script RSVP request failed.", {
+      errorName: error instanceof Error ? error.name : "UnknownError",
+    });
     return jsonError("Maaf, RSVP anda belum dapat direkodkan. Sila cuba lagi sebentar.", 502);
   }
 }
